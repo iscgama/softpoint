@@ -98,7 +98,7 @@ function Reg_Sucursal ( $codigo, $desc, $con ) {
 
     foreach ($res as $a) {
         $sucursal = $a['id_s'];
-        $sql2 = "SELECT id_a FROM existsuc WHERE id_a = " . $idp;
+        $sql2 = "SELECT id_a FROM existsuc WHERE id_a = " . $idp . " AND id_s = " . $sucursal;
         $res2 = $con->query( $sql2 );
         $res2->execute();
 
@@ -221,7 +221,6 @@ function Reg_Sucursal ( $codigo, $desc, $con ) {
         }else {
             echo 'Ese producto ya existe con el codigo o descripción que deseas registrar';
         }
-        
     }else {
 
 
@@ -272,7 +271,7 @@ function Reg_Sucursal ( $codigo, $desc, $con ) {
 
             $statement->execute();
 
-            
+            Reg_Sucursal( $codigo, $desc, $con );
         }
     }
 

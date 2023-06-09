@@ -94,7 +94,7 @@ const cargar_menu = ( ) => {
     let tipo = localStorage.getItem('tipo');
     let sucursal = localStorage.getItem('sucursal');
     usuario = usuario.toLowerCase();
-    document.title = "SoftPoint v ? - " + ' User: ' + usuario;
+    document.title = "SoftPoint v 1.2 - " + ' User: ' + usuario;
 
     
     if (usuario != '') {
