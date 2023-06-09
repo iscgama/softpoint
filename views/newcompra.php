@@ -150,8 +150,7 @@
 
         $('#ttcompra').on('click', function() {
             let numcompra = localStorage.getItem('numcompra');
-            $('#contenido').load('views/compras.html');
-            mensajes ('Solo falta confirmar la compra');
+            finalizar_compra( numcompra );
         });
 
         $('#ccompra').on('click', function() {

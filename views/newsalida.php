@@ -66,7 +66,14 @@
                             >
                             <div class="input-group-append">
                                 <span class="input-group-text my-3" id="descrip">Descripción</span>
-                                <button class="btn btn-danger my-3" id="barticulo" type="button"><i class="fal fa-search"></i></button>
+                                <button 
+                                    class="btn btn-danger my-3" 
+                                    id="barticulo" 
+                                    type="button"
+                                    
+                                >
+                                    <i class="fal fa-search"></i>
+                                </button>
                             </div>
                         </div>
                     </div>

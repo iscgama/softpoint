@@ -176,6 +176,52 @@
                 </center>
                ';
 
+    // // Consultar las ventas antes de cerrar el corte
+    
+    $productos = array();
+    $cantidades =array();
+    $productos =array();
+    
+
+
+    $sql = "SELECT ventan_v FROM ventas 
+                WHERE corte_v = 0 AND status_v = 1";
+    $res = $con->query( $sql );
+    $res->execute( );
+
+    if ($res->rowCount() > 0) {
+        foreach ($res as $a) {
+            $busq = "SELECT id_a, cant_v
+                    FROM ventas2 
+                    WHERE id_v = " . $a['ventan_v'];
+            $res2 = $con->query( $busq );
+            $res2->execute( );
+
+            if ($res2->rowCount() > 0) {
+                foreach ($res2 as $a2) {
+                    $numero = array_search( $a2['id_a'], $productos );
+                    if ( is_numeric( $numero ) ) {
+                        $cantidades[ $numero ] += $a2['cant_v'];
+                    }else {
+                        $productos[] = $a2['id_a'];
+                        $cantidades[] = $a2['cant_v'];
+                    }
+                }
+            }
+        }
+    }
+
+    $salida .= '<br>
+        Se encontraron: ' .count($productos) .  '
+    ';
+
+    for ($a=0; $a < count( $productos ); $a++) { 
+        $salida .= $productos[$a] . '<br>';
+    }
+   
+
+    
+
 
 
     require '../phpmailer/PHPMailer.php';
@@ -194,13 +240,13 @@
 
     $mail->Host = "smtp.gmail.com";
     $mail->SMTPAuth = "true";
-    $mail->SMTPSecure = "tls";
-    $mail->Port = "587";
+    $mail->SMTPSecure = "ssl";
+    $mail->Port = 465;
     $mail->isHTML(true);
-    $mail->Username = "mail.gamasoft@gmail.com";
-    $mail->Password = "M1.Cu3nt@";
+    $mail->Username = "correo.mail.gamasoft@gmail.com";
+    $mail->Password = "pawpnuudqooixvny";
     $mail->Subject = "Corte";
-    $mail->setFrom("mail.gamasoft@gmail.com");
+    $mail->setFrom("correo.mail.gamasoft@gmail.com");
 
     $mail->Body = $salida;
     $mail->addAddress("iscgama@gmail.com");
